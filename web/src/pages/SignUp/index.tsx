@@ -15,14 +15,12 @@ import { Container, Content, Background } from './styles';
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  console.log(formRef);
-
   const handleSubmit = useCallback(async (data: object) => {
     try {
       formRef.current?.setErrors({});
 
       const schema = Yup.object().shape({
-        name: Yup.string().required('Nome obrigat?rio'),
+        name: Yup.string().required('Nome obrigatório'),
         email: Yup.string()
           .required('E-mail obrigatorio')
           .email('Digite um e-mail valido'),
@@ -44,12 +42,8 @@ const SignUp: React.FC = () => {
       <Content>
         <img src={logoImg} alt="GoBarber" />
 
-        <Form
-          ref={formRef}
-          initialData={{ name: 'Fรกbio Picoli Jr' }}
-          onSubmit={handleSubmit}
-        >
-          <h1>Faรงa seu Cadastro</h1>
+        <Form ref={formRef} onSubmit={handleSubmit}>
+          <h1>Faça seu Cadastro</h1>
 
           <Input name="name" icon={FiUser} type="text" placeholder="Name" />
 
@@ -62,7 +56,7 @@ const SignUp: React.FC = () => {
             placeholder="Senha"
           />
 
-          <Button type="submit">Cadastrar Fรกbio</Button>
+          <Button type="submit">Cadastrar</Button>
         </Form>
 
         <a href="login">
