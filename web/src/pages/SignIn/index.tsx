@@ -4,6 +4,7 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useAuth } from '../../hooks/Auth';
+import { useToast } from '../../hooks/Toast';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import logoImg from '../../assets/logo.svg';
@@ -22,6 +23,7 @@ const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
   const { signIn } = useAuth();
+  const { addToast } = useToast();
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -30,16 +32,16 @@ const SignIn: React.FC = () => {
 
         const schema = Yup.object().shape({
           email: Yup.string()
-            .required('E-mail obrigatório')
+            .required('E-mail obrigatรณrio')
             .email('Digite um e-mail valido'),
-          password: Yup.string().required('Senha obrigatória'),
+          password: Yup.string().required('Senha obrigatรณria'),
         });
 
         await schema.validate(data, {
           abortEarly: false,
         });
 
-        signIn({
+        await signIn({
           email: data.email,
           password: data.password,
         });
@@ -49,10 +51,14 @@ const SignIn: React.FC = () => {
           formRef.current?.setErrors(errors);
         }
 
-        // call toast
+        addToast({
+          type: 'error',
+          title: 'Erro na autenticação',
+          description: 'Ocorreu um erro ao fazer login, cheque as credenciais',
+        });
       }
     },
-    [signIn],
+    [addToast, signIn],
   );
 
   return (
@@ -61,7 +67,7 @@ const SignIn: React.FC = () => {
         <img src={logoImg} alt="GoBarber" />
 
         <Form ref={formRef} onSubmit={handleSubmit}>
-          <h1>Faça seu logon</h1>
+          <h1>Faรงa seu logon</h1>
 
           <Input name="email" icon={FiMail} type="text" placeholder="E-mail" />
 
