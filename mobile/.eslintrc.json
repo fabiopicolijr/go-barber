@@ -38,6 +38,8 @@
     "react/prop-types": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "import/prefer-default-export": "off",
+    "no-unused-expressions": "off",
+    "no-shadow":"off",
     "import/extensions": [
       "error",
       "ignorePackages",
