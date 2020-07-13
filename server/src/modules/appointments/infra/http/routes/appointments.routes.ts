@@ -1,15 +1,16 @@
 import { Router } from 'express';
-import { parseISO } from 'date-fns';
-import { container } from 'tsyringe';
-
-import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
 
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
+
+import AppointmentsController from '@modules/appointments/infra/http/controllers/AppointmentsController';
+
+const appointmentsController = new AppointmentsController();
 
 const appointmentsRouter = Router();
 
 // ira usar o middleware em todas as rotas
 appointmentsRouter.use(ensureAuthenticated);
+appointmentsRouter.post('/', appointmentsController.create);
 
 // caso quisesse usar o middleware em uma rota especifica
 // appointmentsRouter.get('/', ensureAuthenticated, async (request, response) => {
@@ -19,20 +20,5 @@ appointmentsRouter.use(ensureAuthenticated);
 
   return response.json(appointments);
 }); */
-
-appointmentsRouter.post('/', async (request, response) => {
-  const { provider_id, date } = request.body;
-
-  const parsedDate = parseISO(date);
-
-  const createAppointment = container.resolve(CreateAppointmentService);
-
-  const appointment = await createAppointment.execute({
-    date: parsedDate,
-    provider_id,
-  });
-
-  return response.json(appointment);
-});
 
 export default appointmentsRouter;
