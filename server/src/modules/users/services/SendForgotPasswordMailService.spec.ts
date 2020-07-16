@@ -3,20 +3,20 @@ import AppError from '@shared/errors/AppError';
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import FakeUserTokensRepository from '@modules/users/repositories/fakes/FakeUserTokensRepository';
 import FakeMailProvider from '@shared/container/providers/MailProvider/fakes/FakeMailProvider';
-import SendForgotPasswordService from './SendForgotPasswordService';
+import SendForgotPasswordMailService from './SendForgotPasswordMailService';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeUserTokensRepository: FakeUserTokensRepository;
 let fakeMailProvider: FakeMailProvider;
-let sendForgotPasswordEmail: SendForgotPasswordService;
+let sendForgotPasswordEmail: SendForgotPasswordMailService;
 
-describe('SendForgotPasswordService', () => {
+describe('SendForgotPasswordMailService', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeUserTokensRepository = new FakeUserTokensRepository();
     fakeMailProvider = new FakeMailProvider();
 
-    sendForgotPasswordEmail = new SendForgotPasswordService(
+    sendForgotPasswordEmail = new SendForgotPasswordMailService(
       fakeUsersRepository,
       fakeMailProvider,
       fakeUserTokensRepository,

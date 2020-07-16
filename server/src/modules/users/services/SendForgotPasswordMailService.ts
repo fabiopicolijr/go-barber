@@ -1,4 +1,5 @@
 import { injectable, inject } from 'tsyringe';
+import path from 'path';
 
 import AppError from '@shared/errors/AppError';
 
@@ -11,7 +12,7 @@ interface IRequest {
 }
 
 @injectable()
-class SendForgotPasswordService {
+class SendForgotPasswordMailService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -30,12 +31,29 @@ class SendForgotPasswordService {
       throw new AppError('User not exists.');
     }
 
-    await this.userTokensRepository.generateToken(user.id);
+    const { token } = await this.userTokensRepository.generateToken(user.id);
 
-    this.mailProvider.sendMail(
-      email,
-      'Pedido de recuperação de senha enviado!',
+    const forgotPasswordTemplate = path.resolve(
+      __dirname,
+      '..',
+      'templates',
+      'forgot_password.hbs',
     );
+
+    await this.mailProvider.sendMail({
+      to: {
+        name: user.name,
+        email: user.email,
+      },
+      subject: '',
+      templateData: {
+        file: forgotPasswordTemplate,
+        variables: {
+          name: user.name,
+          link: `http://localhost:3000/reset_password?token=${token}`,
+        },
+      },
+    });
   }
 }
-export default SendForgotPasswordService;
+export default SendForgotPasswordMailService;

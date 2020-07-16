@@ -32,10 +32,10 @@ class Appointment {
   date: Date;
 
   @CreateDateColumn()
-  created_at: string;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updated_at: string;
+  updated_at: Date;
 
   /*
   ** Apos a utilizacao de entidades dentro do TypeORM, nao precisamos mais
