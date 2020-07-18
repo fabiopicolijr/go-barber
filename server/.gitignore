@@ -1,3 +1,7 @@
+# Custom FP17
+.env
+ormconfig.json
+
 #temp files
 tmp/*
 !tmp/.gitkeep
