@@ -36,8 +36,6 @@ class ListProviderDayAvailabilityService {
       },
     );
 
-    console.log(appointments);
-
     const hourStart = 8;
 
     const eachHourArray = Array.from(
@@ -59,8 +57,6 @@ class ListProviderDayAvailabilityService {
         available: !hasAppointmentInHour && isAfter(compareDate, currentDate),
       };
     });
-
-    console.log(availability);
 
     return availability;
   }
