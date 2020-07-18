@@ -18,11 +18,13 @@ describe('ListProviderDayAvailability', () => {
     await fakeAppointmentsRepository.create({
       provider_id: 'user-id',
       date: new Date(2020, 4, 20, 14, 0, 0), // Lembrar Mês 1 a menos. Errado no JS.
+      user_id: 'user2-id',
     });
 
     await fakeAppointmentsRepository.create({
       provider_id: 'user-id',
       date: new Date(2020, 4, 20, 15, 0, 0),
+      user_id: 'user2-id',
     });
 
     // Com isso, é como se agora fossem 11 horas e não vamos poder agendar antes disso.

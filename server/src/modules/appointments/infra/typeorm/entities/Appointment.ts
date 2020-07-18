@@ -21,12 +21,16 @@ class Appointment {
   @Column()
   provider_id: string;
 
-  /* Criando o relacionamento da forma abaixo,  conseguiremos acessar todos os
-   ** dados do usuario atraves de um agendamento
-   */
   @ManyToOne(() => User)
   @JoinColumn({ name: 'provider_id' })
   provider: User;
+
+  @Column()
+  user_id: string;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
   @Column('time without time zone')
   date: Date;
