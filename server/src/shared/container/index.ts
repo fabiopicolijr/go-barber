@@ -1,10 +1,12 @@
 // DI - Dependency injections: This is the injector base program.
 // registerSingleton: runs only once.
 // Essas injecoes sao relacionadas aos modulos padroes do sistema. Existe um arquivo de injecao dos providers tbm.
-
 import { container } from 'tsyringe';
 
-import './providers';
+// as implementacoes de cada um dos providers shareds estão dentro das pastas delesproviders
+import '@shared/container/providers';
+
+// as implementacoes de cada um dos providers dos módulos estão abaixo, mas poderiam muito bem estar nos proprios modulos/index
 import '@modules/users/providers';
 
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
