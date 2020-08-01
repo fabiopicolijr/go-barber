@@ -3,6 +3,7 @@ import { injectable, inject } from 'tsyringe';
 import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 import ICachedProvider from '@shared/container/providers/CacheProvider/models/ICachedProvider';
+import { classToClass } from 'class-transformer';
 
 interface IRequest {
   provider_id: string;
@@ -42,11 +43,11 @@ class ListProviderAppointmentsService {
           year,
         },
       );
-
-      console.log('usou o postgress');
     }
 
-    await this.cacheProvider.save(cacheKey, appointments);
+    // cuidar para salvar no cache sempre com a serialização (classToClass),
+    // senao o redis se perde.
+    await this.cacheProvider.save(cacheKey, classToClass(appointments));
 
     return appointments;
   }
