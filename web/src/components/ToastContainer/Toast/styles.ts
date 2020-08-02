@@ -3,7 +3,7 @@ import { animated } from 'react-spring';
 
 interface ToastProps {
   type?: 'success' | 'error' | 'info';
-  hasDescripiton: boolean;
+  hasDescription: number;
 }
 
 const toastTypes = {
@@ -65,7 +65,7 @@ export const Container = styled(animated.div)<ToastProps>`
   }
 
   ${props =>
-    !props.hasDescripiton &&
+    !props.hasDescription &&
     css`
       align-items: center;
 
