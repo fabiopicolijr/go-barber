@@ -94,14 +94,12 @@ const SignIn: React.FC = () => {
 
             <Link to="/forgot-password">Esqueci minha senha</Link>
           </Form>
-
           <Link to="signup">
             <FiLogIn />
             Criar conta
           </Link>
         </AnimationContainer>
       </Content>
-
       <Background />
     </Container>
   );

@@ -18,10 +18,14 @@ console.log('==> [FP17] <== Before server start');
 
 const app = express();
 
-app.use(rateLimiter);
 app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.uploadsFolder));
+// @study
+// colocamos depois do files para ele não limitar as requests das imagens
+// acho que deve ter uma forma mais legal de fazer isso, pois resolvemos
+// apenas colocando o ratelimiter depois do use dos files.
+app.use(rateLimiter);
 
 app.use(routes);
 

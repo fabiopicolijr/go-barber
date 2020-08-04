@@ -34,6 +34,9 @@ class ListProviderAppointmentsService {
       cacheKey,
     );
 
+    // let appointments;
+    // console.log(cacheKey);
+
     if (!appointments) {
       appointments = await this.appointmentsRepository.findAllInDayFromProvider(
         {
@@ -44,6 +47,8 @@ class ListProviderAppointmentsService {
         },
       );
     }
+
+    // console.log(appointments);
 
     // cuidar para salvar no cache sempre com a serialização (classToClass),
     // senao o redis se perde.

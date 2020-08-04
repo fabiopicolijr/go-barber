@@ -36,7 +36,7 @@ class UpdateUserAvatarService {
 
     user.avatar = filename;
 
-    return user;
+    return this.usersRepository.save(user);
   }
 }
 
