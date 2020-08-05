@@ -15,6 +15,6 @@ export default class UsersController {
 
     delete user.password;
 
-    return response.json({ user: classToClass(user) });
+    return response.json(classToClass(user));
   }
 }
