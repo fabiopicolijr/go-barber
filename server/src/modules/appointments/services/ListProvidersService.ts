@@ -1,4 +1,5 @@
 import { injectable, inject } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import ICachedProvider from '@shared/container/providers/CacheProvider/models/ICachedProvider';
@@ -32,7 +33,7 @@ class ListProvidersService {
       console.log('Sem cache no Redis, carregou do Postgres');
     }
 
-    this.cacheProvider.save(`provider-list:${user_id}`, users);
+    this.cacheProvider.save(`provider-list:${user_id}`, classToClass(users));
 
     return users;
   }
