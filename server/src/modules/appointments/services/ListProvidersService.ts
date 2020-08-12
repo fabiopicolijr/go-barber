@@ -21,9 +21,11 @@ class ListProvidersService {
   ) {}
 
   public async execute({ user_id }: IRequest): Promise<User[]> {
-    let users = await this.cacheProvider.recover<User[]>(
+    /* let users = await this.cacheProvider.recover<User[]>(
       `provider-list:${user_id}`,
-    );
+    ); */
+
+    let users;
 
     if (!users) {
       users = await this.usersRepository.findAllProviders({

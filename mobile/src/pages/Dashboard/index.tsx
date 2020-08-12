@@ -13,6 +13,7 @@ import {
   ProfileButton,
   UserAvatar,
   ProvidersList,
+  ProvidersListTitle,
   ProviderContainer,
   ProviderAvatar,
   ProviderInfo,
@@ -37,11 +38,18 @@ const Dashboard: React.FC = () => {
       console.log(response.data);
       setProviders(response.data);
     });
-  }, []);
+  }, [setProviders]);
 
   const navigateToProfile = useCallback(() => {
     signOut();
   }, [signOut]);
+
+  const navigateToCreateAppointment = useCallback(
+    (providerId: string) => {
+      navigate('CreateAppointment', { providerId });
+    },
+    [navigate],
+  );
 
   return (
     <Container>
@@ -59,24 +67,25 @@ const Dashboard: React.FC = () => {
       <ProvidersList
         data={providers}
         keyExtractor={provider => provider.id}
+        ListHeaderComponent={
+          <ProvidersListTitle>Cabeleireiros</ProvidersListTitle>
+        }
         renderItem={({ item: provider }) => (
           <ProviderContainer
-            onPress={() => {
-              return false;
-            }}
+            onPress={() => navigateToCreateAppointment(provider.id)}
           >
             <ProviderAvatar source={{ uri: provider.avatar_url }} />
 
             <ProviderInfo>
-              <ProviderName>{provider.avatar_url}</ProviderName>
+              <ProviderName>{provider.name}</ProviderName>
 
               <ProviderMeta>
-                <Icon name="calendar" size={14} color="FF9900" />
+                <Icon name="calendar" size={14} color="#FF9900" />
                 <ProviderMetaText>Segunda à sexta</ProviderMetaText>
               </ProviderMeta>
 
               <ProviderMeta>
-                <Icon name="clock" size={14} color="FF9900" />
+                <Icon name="clock" size={14} color="#FF9900" />
                 <ProviderMetaText>8h às 18h</ProviderMetaText>
               </ProviderMeta>
             </ProviderInfo>
