@@ -59,16 +59,14 @@ const SignUp: React.FC = () => {
           abortEarly: false,
         });
 
-        console.log(data);
-
         await api.post('users', data);
-
-        navigation.goBack();
 
         Alert.alert(
           'Cadastro realizado!',
           'Você já pode fazer o seu logon no GoBarber',
         );
+
+        navigation.goBack();
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
