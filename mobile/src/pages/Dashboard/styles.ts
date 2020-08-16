@@ -16,6 +16,7 @@ export const Header = styled.View`
   justify-content: space-between;
   align-items: center;
 `;
+
 export const HeaderTitle = styled.Text`
   color: #f4ede8;
   font-size: 20px;

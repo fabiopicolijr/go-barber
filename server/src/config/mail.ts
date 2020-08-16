@@ -9,7 +9,7 @@ interface IMailConfig {
   };
 }
 
-console.log(`process.env.MAIL_DRIVER: ${process.env.MAIL_DRIVER}`);
+// console.log(`process.env.MAIL_DRIVER: ${process.env.MAIL_DRIVER}`);
 
 export default {
   driver: process.env.MAIL_DRIVER || 'ethereal',
